@@ -1,0 +1,255 @@
+  The Small Arms Ballistics Handbook
+  Joshua Weage <weage98@yahoo.com>
+  Version 1.3.3, 2 July 2005
+
+  This Handbook describes Small Arms Ballistics Version 1.3.3
+  ______________________________________________________________________
+
+  Table of Contents
+
+
+  1. Introduction
+     1.1 Changes
+
+  2. Installation
+     2.1 How to obtain Small Arms Ballistics
+     2.2 Requirements
+     2.3 Compilation and installation
+
+  3. Usage
+     3.1 Configuration Options
+     3.2 Drag Models
+        3.2.1 Available Drag Models
+     3.3 Select Bullet
+     3.4 Calculation Parameters
+     3.5 Trajectory Table Output
+     3.6 Calculate B.C.
+
+  4. Information Sources
+  5. Copyright
+
+
+  ______________________________________________________________________
+
+  [1m1.  Introduction[0m
+
+  Small Arms Ballistics is, as the name says, a ballistics calculator
+  for small arms fire.  It is a terminal application written using
+  curses.
+
+  Small Arms Ballistics is derived from smallball, which was written by
+  Ole-Hj. Kristensen <okh@edeber.nta.no>.  I have pretty much rewritten
+  the entire program, but smallball got me started.  All major
+  trajectory calculations have been implemented, and a variety of bullet
+  drag models are available.
+
+  The program needs a color capable terminal, otherwise it won't run.
+
+
+  [1m1.1.  Changes[0m
+
+  See the ChangeLog.
+
+
+  [1m2.  Installation[0m
+
+
+
+  [1m2.1.  How to obtain Small Arms Ballistics[0m
+
+  Small Arms Ballistics can be downloaded from www.ibiblio.org at the
+  following location
+  www.ibiblio.org/pub/linux/misc/saballistics-1.3.3.tar.gz.
+
+
+
+  [1m2.2.  Requirements[0m
+
+  This program requires the menu, form, and ncurses libaries and a color
+  capable terminal emulator.  The program is written in ANSI C.
+
+
+  [1m2.3.  Compilation and installation[0m
+
+  In order to compile and install Small Arms Ballistics on your system,
+  type the following in the base directory of the distribution:
+
+  ./configure make make install
+
+
+
+       % ./configure
+       % make
+       % make install
+
+
+
+  Since Small Arms Ballistics uses
+
+  autoconf
+
+
+  you should have not trouble compiling it.  Should you run into prob-
+  lems please report them to the the author at weage98@yahoo.com
+
+
+  [1m3.  Usage[0m
+
+
+
+  [1m3.1.  Configuration Options[0m
+
+
+  +o  Unit System - English or Metric unit operation.
+
+  +o  Drag Model - The drag function used to calculate projectile
+     deceleration, see the DRAG MODELS section.
+
+  +o  Maximum Flight Time - The projectile flight is calculated using an
+     explicit time stepping integration routine.  This is the maximum
+     simulated flight time.
+
+  +o  Integration Points Per Second - The number of integration steps per
+     second.  Values as low as 10 seem to produce good data.  1000 was
+     used in the smallball program, so it is the default here.
+
+
+  [1m3.2.  Drag Models[0m
+
+  The deceleration of a bullet is calculated using standard drag models.
+  These models were produced by firing a standard projectile at a range
+  of velocities and recording its performance.  The ballistic
+  coefficient relates any bullet to the standard model.  However, only
+  projectiles shaped exactly the same as the standard will match the
+  model's performance.
+
+  For the best accuracy, recalculate the ballistic coefficient of the
+  bullet using your chosen drag model.  Most manufacturers report the
+  B.C. using the G1 model, so that is the best to start with.
+
+
+  [1m3.2.1.  Available Drag Models[0m
+
+
+  +o  Ingalls - Based on Krupp data of 1881
+
+  +o  British - Based on British 1909 data
+
+  +o  G1 - Standard drag model (similar to Ingalls)
+
+  +o  G5 - Moderate boat tails - 7 degree 30' tail taper with 6.19
+     caliber tangent nose ogive.
+
+  +o  G6 - Flat base, spire points.  6.09 caliber secant nose ogive
+
+  +o  G7 - "VLD" boat tail.  Long 7 degree 30' tail taper with 10 caliber
+     tangent nose ogive.
+
+  For .22LR use the G1 model.  The G1 is good for blunt nose, exposed
+  lead bullets with a velocity less than 1400 ft/s.
+
+
+  [1m3.3.  Select Bullet[0m
+
+  I have included a datafile of bullets which was taken from PCB by Odd
+  Harvard Skevik.  www.stud.ntnu.no/~oddske/ballistikk.html This file
+  will be copied into the share directory.
+
+  The first two lines of this file are skipped.  For bullet entries, the
+  diameter and description must end at column 40 and are followed by the
+  weight and the ballistic coefficient.  Feel free to add additional
+  entries to this file, following the existing format.
+
+
+  [1m3.4.  Calculation Parameters[0m
+
+
+  +o  Ballistic Coefficient - Projectile ballistic coefficient.
+
+  +o  Bullet Weight - Projectile weight in grams or grains.
+
+  +o  Wind Velocity - Wind velocity at a 90 degree angle to projectile
+     flight.
+
+  +o  Muzzle Velocity - Initial velocity of projectile.
+
+  +o  Bore-Sight Distance - Distance between the line of sight and the
+     bore.
+
+  +o  Zero Distance - Sight zero distance.
+
+  +o  Firing Angle - Elevation angle of the shot.  The Path output in the
+     trajectory table is calculated relative to this.
+
+  +o  Starting Range - Starting distance listed in the trajectory output.
+
+  +o  Ending Range - Last distance listed in the trajectory output.
+
+  +o  Step Size - Range increment used for the trajectory output.
+
+
+  [1m3.5.  Trajectory Table Output[0m
+
+
+  +o  Range - The horizontal distance to the projectile location.  For
+     calculations with a non-zero firing angle, the Path values are
+     given for the range along the line of sight, not the horizontal
+     distance.
+
+  +o  Velocity - Absolute projectile velocity.
+
+  +o  Energy - Projectile kinetic energy.
+
+  +o  Mom. - Projectile momentum.
+
+  +o  Path - Actual projectile flight path in relation to the line of
+     sight.
+
+  +o  Zero - Projectile flight path for a horizontal, zeroed shot.
+
+  +o  Drop - Amount of drop if the projectile is fired perfectly
+     horizontal.
+
+  +o  Drift - Horizontal drift due to wind, along line of sight.
+
+  +o  Time - Flight time of projectile.
+
+
+  [1m3.6.  Calculate B.C.[0m
+
+  This function calculates the projectile ballistic coefficient based on
+  the input data and the selected drag model.
+
+
+  [1m4.  Information Sources[0m
+
+  There are several sites on the web that have good information on
+  ballistics, these are the ones I recommend:
+
+
+  +o  www.snipercountry.com/ballistics/index.html
+
+  +o  www.lascruces.com:80/~jbm/
+
+
+  [1m5.  Copyright[0m
+
+
+  Small Arms Ballistics Copyright 2005 Joshua Weage, <weage98@yahoo.com>
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+
+

@@ -1,0 +1,49 @@
+1.3.3
+ 2 July 2005 <weage98@yahoo.com>
+ - redistribute as 1.3.2 tarball was not up to date
+
+1.3.2
+ 30 June 2003 <weage98@yahoo.com>
+ - distribution didn't include saballistics.lsm.in
+ - Add code to detect dirent.h header properly
+ - Error out of configure when missing required libs and headers
+ - index.sgml.in now processed by autoconf
+ - README must be copied from docs/en/index.txt after a build!
+ - removed unneeded programs from configure.ac
+ - Added conditional creation of documentation depending on
+   the existance of the linuxdoc tool.
+ - Added date substitutions into configure.ac.
+
+29 Jun 2005: 1.3.1
+ <weage98@yahoo.com>
+ - Updated autotools config
+ - Reorganized directory hierarchy
+ - Add units header to saved files
+ - Fixed problem with unit conversion and path calculation when
+   writing to a file.
+ - Added a few more comments to explain the calculation procedure.
+ <geff@spamcop.net>
+ - Fixed bug when writing out height of sight in english units.
+   Height was reported as 12 * actual height in results_pad.c.
+
+4 April 2004: 1.3.0
+	- Moved the codebase to kdevelop
+	- Cleaned up the code
+	- Changed color scheme
+
+5 Oct. 1999: v1.2
+        - Added bullet database
+        - Fixed bug in B.C. calculation.
+        - Firing angle effects
+        - Added flight time and integration points configuration
+
+27 Sep. 1999: v1.1
+        - Better docs
+        - Additional trajectory table entries
+        - Trajectory table save function
+        - TAB, and ESC key recognition
+        - "G" drag functions and descriptions
+
+19 Sep. 1999: v1.0
+        Released v1.0
+

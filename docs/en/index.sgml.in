@@ -1,0 +1,191 @@
+
+<!doctype linuxdoc system>
+<article>
+<title>The @PACKAGE_NAME@ Handbook
+<author>
+<name>Joshua Weage <htmlurl url="mailto:weage98@yahoo.com" name = "<weage98@yahoo.com>">
+<date>Version @PACKAGE_VERSION@, @DATE@
+<abstract>
+This Handbook describes @PACKAGE_NAME@ Version @PACKAGE_VERSION@
+</abstract>
+
+<toc>
+
+<sect>Introduction
+<p>
+@PACKAGE_NAME@ is, as the name says, a ballistics calculator
+for small arms fire.  It is a terminal application written using curses.
+
+@PACKAGE_NAME@ is derived from smallball, which was written
+by Ole-Hj. Kristensen <htmlurl url="mailto:okh@edeber.nta.no" name="<okh@edeber.nta.no>">.
+ I have pretty much rewritten
+the entire program, but smallball got me started.  All major trajectory
+calculations have been implemented, and a variety of bullet drag models
+are available.
+
+The program needs a color capable terminal, otherwise it won't run.
+
+<sect1>Changes
+<p>
+See the ChangeLog.
+
+<sect>Installation
+<p>
+
+<sect1>How to obtain @PACKAGE_NAME@
+<p>
+@PACKAGE_NAME@ can be downloaded from
+<htmlurl url="http://www.iblblio.org/" name="www.ibiblio.org"> at the following
+location <htmlurl url="http://www.ibiblio.org/pub/linux/misc/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz"
+name="www.ibiblio.org/pub/linux/misc/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz">.
+
+<sect1>Requirements
+<p>
+This program requires the menu, form, and ncurses libaries and a color capable terminal emulator.
+The program is written in ANSI C.
+
+<sect1>Compilation and installation
+<p>
+In order to compile and install Small Arms Ballistics on your system, type the following in
+the base directory of the distribution:
+
+./configure
+make
+make install
+
+<tscreen><verb>
+% ./configure
+% make
+% make install
+</verb></tscreen>
+
+Since @PACKAGE_NAME@ uses <verb>autoconf</verb>
+you should have not trouble compiling it.
+Should you run into problems please report them to the the author at 
+<htmlurl url="mailto:weage98@yahoo.com" name = "weage98@yahoo.com">
+
+<sect> Usage
+<p>
+
+<sect1>Configuration Options
+<p>
+<itemize>
+<item>Unit System - English or Metric unit operation.
+<item>Drag Model - The drag function used to calculate projectile deceleration,
+see the DRAG MODELS section.
+<item>Maximum Flight Time - The projectile flight is calculated using an explicit time
+ stepping integration routine.  This is the maximum simulated flight
+ time.
+<item>Integration Points Per Second - The number of integration steps per second.
+ Values as low as 10 seem to produce good data.  1000 was used in
+ the smallball program, so it is the default here.
+</itemize>
+  
+<sect1>Drag Models
+<p>
+The deceleration of a bullet is calculated using standard drag models.
+These models were produced by firing a standard projectile at a range
+of velocities and recording its performance.  The ballistic coefficient
+relates any bullet to the standard model.  However, only projectiles
+shaped exactly the same as the standard will match the model's performance.
+
+For the best accuracy, recalculate the ballistic coefficient of the bullet
+using your chosen drag model.  Most manufacturers report the B.C. using the
+G1 model, so that is the best to start with.
+
+<sect2>Available Drag Models
+<p>
+<itemize>
+<item>Ingalls - Based on Krupp data of 1881
+<item>British - Based on British 1909 data
+<item>G1 - Standard drag model (similar to Ingalls)
+<item>G5 - Moderate boat tails - 7 degree 30' tail taper with 6.19 caliber tangent nose ogive.
+<item>G6 - Flat base, spire points.  6.09 caliber secant nose ogive
+<item>G7 - "VLD" boat tail.  Long 7 degree 30' tail taper with 10 caliber tangent nose ogive.
+</itemize>
+
+For .22LR use the G1 model.  The G1 is good for blunt nose,
+exposed lead bullets with a velocity less than 1400 ft/s.
+
+<sect1>Select Bullet
+<p>
+I have included a datafile of bullets which was taken from PCB by
+Odd Harvard Skevik.
+<htmlurl url="http://www.stud.ntnu.no/~oddske/ballistikk.html" name="www.stud.ntnu.no/~oddske/ballistikk.html">
+This file will be copied into the share directory.
+
+The first two lines of this file are skipped.  For bullet entries,
+the diameter and description must end at column 40 and are followed
+by the weight and the ballistic coefficient.  Feel free to add additional
+entries to this file, following the existing format.
+
+<sect1>Calculation Parameters
+<p>
+<itemize>
+<item>Ballistic Coefficient - Projectile ballistic coefficient.
+<item>Bullet Weight - Projectile weight in grams or grains.
+<item>Wind Velocity - Wind velocity at a 90 degree angle to projectile flight.
+<item>Muzzle Velocity - Initial velocity of projectile.
+<item>Bore-Sight Distance - Distance between the line of sight and the bore.
+<item>Zero Distance - Sight zero distance.
+<item>Firing Angle - Elevation angle of the shot.  The Path output in the
+ trajectory table is calculated relative to this.
+<item>Starting Range - Starting distance listed in the trajectory output.
+<item>Ending Range - Last distance listed in the trajectory output.
+<item>Step Size - Range increment used for the trajectory output.
+</itemize>
+
+<sect1>Trajectory Table Output
+<p>
+<itemize>
+<item>Range - The horizontal distance to the projectile location.  For calculations
+ with a non-zero firing angle, the Path values are given for the range
+ along the line of sight, not the horizontal distance.
+<item>Velocity - Absolute projectile velocity.
+<item>Energy - Projectile kinetic energy.
+<item>Mom. - Projectile momentum.
+<item>Path - Actual projectile flight path in relation to the line of sight.
+<item>Zero - Projectile flight path for a horizontal, zeroed shot.
+<item>Drop - Amount of drop if the projectile is fired perfectly horizontal.
+<item>Drift - Horizontal drift due to wind, along line of sight.
+<item>Time - Flight time of projectile.
+</itemize>
+
+<sect1>Calculate B.C.
+<p>
+This function calculates the projectile ballistic coefficient based
+on the input data and the selected drag model.
+
+<sect>Information Sources
+ <p>
+ There are several sites on the web that have good information on
+ballistics, these are the ones I recommend:
+
+<itemize>
+<item><htmlurl url="http://www.snipercountry.com/ballistics/index.html"
+                                   name = "www.snipercountry.com/ballistics/index.html">
+<item><htmlurl url="http://www.lascruces.com:80/~jbm/"
+                                   name = "www.lascruces.com:80/~jbm/">
+</itemize>
+
+<sect>Copyright
+<p>
+
+@PACKAGE_NAME@ @COPYRIGHT@,
+<htmlurl url="mailto:weage98@yahoo.com" name = "<weage98@yahoo.com>">
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+</article>

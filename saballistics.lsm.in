@@ -1,0 +1,16 @@
+Begin4
+Title:          @PACKAGE_NAME@
+Version:        @PACKAGE_VERSION@
+Entered-date:   @LSMDATE@
+Description:    Small arms ballistics calculator.
+Keywords:       ballistics, trajectory
+Author:         weage98@yahoo.com (Joshua Weage) 
+Maintained-by:  weage98@yahoo.com (Joshua Weage) 
+Primary-site:   www.ibiblio.org /pub/linux/apps/misc
+                @PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz
+                saballistics.lsm
+Alternate-site:
+Original-site:  
+Platforms:      Linux and other Unices
+Copying-policy: GNU General Public License 2.0
+End
